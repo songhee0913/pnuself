@@ -1,1 +1,1 @@
-web: gunicorn pnu.wsgi --log-file -
+web: gunicorn pnuself.wsgi --log-file -
