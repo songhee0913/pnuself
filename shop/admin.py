@@ -14,4 +14,7 @@ class ShopAdmin(admin.ModelAdmin):
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
+    search_fields = ['name']
+    list_display = ['id','name','desc','price']
+    list_display_links = ['name']
     list_filter = ["created_at"]

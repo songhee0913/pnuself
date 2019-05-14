@@ -1,25 +1,47 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+{% extends "shop/layout.html" %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-            <h1>Item List</h1>
+{% block content %}
+    <h1>Shop List</h1>
 
-            <table class="table table-bordered table-hover">
+    <form action="" method="GET">
+        <input type="text" name="query" value="{{ query }}" placeholder="검색어를 입력해주세요." />
+        <input type="submit" value="검색" class="btn btn-primary" />
+    </form>
+
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Actions</th>
+                <th>delete</th>
+            </tr>
+        </thead>
+        <tbody>
             {% for shop in shop_list %}
                 <tr>
                     <td>
-                        <a href="/shop/{{ shop.pk }}/">
+                        <a href="{{ shop.get_absolute_url }}">
                             {{ shop.name }}
                         </a>
                     </td>
-                    <td>{{ shop.desc }}</td>
                     <td>{{ shop.address }}</td>
+                    <td>
+                        <a href="{% url 'shop:shop_edit' shop.pk %}" class="btn btn-info btn-sm">
+                            수정
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'shop:shop_delete' shop.id %}" class="btn btn-danger btn-sm">
+                            삭제
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
-            </table>
+        </tbody>
+    </table>
 
-            <a href="#" class="btn btn-primary">New Shop</a>
-        </div>
-    </div>
-</div>
+    <a href="{% url 'shop:shop_new' %}" class="btn btn-primary">
+        New Shop
+    </a>
+{% endblock %}

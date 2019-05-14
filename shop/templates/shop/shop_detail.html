@@ -1,4 +1,28 @@
-<h1>{{ shop.name }}</h1>
-{{ shop.desc }}
-{{ shop.address }}
-<hr/>
+{% extends "shop/layout.html" %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            Shop: {{ shop.name }}
+        </div>
+        <div class="card-body">
+            {% if shop.photo %}
+                <img src="{{ shop.photo.url }}" style="max-width: 100%;" />
+            {% endif %}
+
+            <!-- <h5 class="card-title">Special title treatment</h5> -->
+            <p class="card-text">
+                {{ shop.address }}
+            </p>
+            <p class="card-text">
+                {{ shop.desc }}
+            </p>
+            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+        </div>
+    </div>
+
+    <hr/>
+    <a href="{% url 'shop:shop_list' %}" class="btn btn-primary">목록</a>
+    <a href="{% url 'shop:shop_edit' shop.pk %}" class="btn btn-success">수정</a>
+    <a href="{% url 'shop:shop_delete' shop.id %}" class="btn btn-danger">삭제</a>
+{% endblock %}
